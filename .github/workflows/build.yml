@@ -33,9 +33,10 @@ jobs:
         git clone https://github.com/xploitednoob/signapk.git
         java -jar ./signapk/signapk.jar ./signapk/publickey.x509.pem ./signapk/publickey.pk8 ./term/build/outputs/apk/term-release-unsigned.apk ./signed-apk/terminal-release.apk
         java -jar ./signapk/signapk.jar ./signapk/publickey.x509.pem ./signapk/publickey.pk8 ./samples/telnet/build/outputs/apk/telnet-release-unsigned.apk ./signed-apk/telnet-release.apk
+        java -jar ./signapk/signapk.jar ./signapk/publickey.x509.pem ./signapk/publickey.pk8 ./samples/pathbroadcasts/build/outputs/apk/pathbroadcasts-release-unsigned.apk ./signed-apk/pathbroadcasts-release.apk
+        java -jar ./signapk/signapk.jar ./signapk/publickey.x509.pem ./signapk/publickey.pk8 ./samples/intents/build/outputs/apk/intents-release-unsigned.apk ./signed-apk/intents-release.apk
     - name: Store Generated APK
       uses: actions/upload-artifact@v1
       with:
         name: terminal
         path: ./signed-apk
-

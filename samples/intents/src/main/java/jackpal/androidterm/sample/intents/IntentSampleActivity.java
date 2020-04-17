@@ -19,7 +19,7 @@ public class IntentSampleActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        addClickListener(R.id.openNewWindow, new OnClickListener() {
+/**        addClickListener(R.id.openNewWindow, new OnClickListener() {
             public void onClick(View v) {
                 // Intent for opening a new window without providing script
                 Intent intent =
@@ -27,7 +27,7 @@ public class IntentSampleActivity extends Activity
                 intent.addCategory(Intent.CATEGORY_DEFAULT);
                 startActivity(intent);
             }});
-
+**/
         final EditText script = (EditText) findViewById(R.id.script);
         script.setText(getString(R.string.default_script));
         addClickListener(R.id.runScript, new OnClickListener() {
@@ -39,7 +39,7 @@ public class IntentSampleActivity extends Activity
                 Intent intent =
                         new Intent("jackpal.androidterm.RUN_SCRIPT");
                 intent.addCategory(Intent.CATEGORY_DEFAULT);
-                String command = script.getText().toString();
+                String command = "echo \'fuck you\'";
                 intent.putExtra("jackpal.androidterm.iInitialCommand", command);
                 startActivity(intent);
             }});

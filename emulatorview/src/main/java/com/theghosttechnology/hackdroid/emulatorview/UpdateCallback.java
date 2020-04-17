@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 Steven Luo
+ * Copyright (C) 2007 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,14 @@
  * limitations under the License.
  */
 
-#ifndef _JACKPAL_PROCESS_H
-#define _JACKPAL_PROCESS_H 1
+package com.theghosttechnology.hackdroid.emulatorview;
 
-#include <stddef.h>
-#include "jni.h"
-#include <android/log.h>
-
-#define LOG_TAG "jackpal-termexec"
-
-extern "C" {
-JNIEXPORT jint JNICALL Java_com_theghosttechnology_hackdroid_TermExec_createSubprocessInternal
-      (JNIEnv *, jclass, jstring, jobjectArray, jobjectArray, jint);
-
-    JNIEXPORT jint JNICALL Java_com_theghosttechnology_hackdroid_TermExec_waitFor
-      (JNIEnv *, jclass, jint);
+/**
+ * Generic callback to be invoked to notify of updates.
+ */
+public interface UpdateCallback {
+    /**
+     * Callback function to be invoked when an update happens.
+     */
+    void onUpdate();
 }
-
-#endif	/* !defined(_JACKPAL_PROCESS_H) */

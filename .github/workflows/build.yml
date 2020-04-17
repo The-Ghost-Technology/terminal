@@ -1,0 +1,39 @@
+name: Build
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Clone repository
+      uses: actions/checkout@v2
+    - name: Install Required Packages
+      run: |
+        sudo dpkg --add-architecture i386
+        sudo apt update -yq
+        sudo apt install -yq zlib1g-dev libssl-dev:i386 zlib1g-dev:i386
+    - name: Install NDK R10e
+      run: |
+        cd /home/runner
+        curl --fail --retry 3 -o android-ndk.zip https://dl.google.com/android/repository/android-ndk-r10e-Linux-x86_64.zip
+        unzip -q android-ndk.zip
+        mv android-ndk-r10e android-ndk
+        rm -rf android-ndk.zip
+    - name: Install SDK Packages
+      run:
+        yes | sudo ./tools/install-sdk-packages
+    - name: Build Release APK
+      run: |
+        echo 'ndk.dir=/home/runner/android-ndk' >> local.properties
+        ./gradlew assembleRelease
+    - name: Sign Generated APK
+      run: |
+        git clone https://github.com/xploitednoob/signapk.git
+        java -jar ./signapk/signapk.jar ./signapk/publickey.x509.pem ./signapk/publickey.pk8 ./term/build/outputs/apk/term-release-unsigned.apk terminal-release.apk
+    - name: Store Generated APK
+      uses: actions/upload-artifact@v1
+      with:
+        name: terminal
+        path: ./terminal-release.apk
+
